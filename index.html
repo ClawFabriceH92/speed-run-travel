@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Speed Run Travel — Une ville. Deux musées. Une balade.</title>
+  <meta name="description" content="Speed Run Travel prépare des escapades culturelles express : une ville, deux musées, une balade, retour maison." />
+  <style>
+    :root {
+      --blue-950: #071a2d;
+      --blue-900: #0b2742;
+      --blue-800: #12395b;
+      --orange: #ff8a1d;
+      --orange-2: #ffb347;
+      --cream: #fff7e8;
+      --paper: #fffcf5;
+      --ink: #112233;
+      --muted: #607084;
+      --line: rgba(17, 34, 51, .12);
+      --shadow: 0 22px 70px rgba(7, 26, 45, .18);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(255, 138, 29, .20), transparent 34rem),
+        linear-gradient(180deg, var(--cream), #ffffff 54%, #eef6ff);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: rgba(255, 247, 232, .78);
+      border-bottom: 1px solid rgba(7, 26, 45, .08);
+    }
+    .nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: -.03em; }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--orange); box-shadow: 0 8px 24px rgba(255,138,29,.25);
+    }
+    .brand span { font-size: 1.08rem; }
+    .nav-links { display: flex; gap: 22px; align-items: center; color: var(--blue-800); font-weight: 700; font-size: .95rem; }
+    .nav-links a:hover { color: var(--orange); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 48px; padding: 0 22px; border-radius: 999px;
+      font-weight: 900; border: 0; cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--orange); color: #1a2230; box-shadow: 0 16px 34px rgba(255, 138, 29, .32); }
+    .btn-dark { background: var(--blue-950); color: white; box-shadow: 0 16px 34px rgba(7, 26, 45, .25); }
+    .btn-ghost { background: rgba(255,255,255,.72); color: var(--blue-900); border: 1px solid rgba(7,26,45,.12); }
+
+    .hero { padding: 82px 0 54px; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 44px; align-items: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: 999px;
+      background: rgba(255, 138, 29, .14); color: #9a4b00;
+      font-weight: 900; font-size: .88rem; border: 1px solid rgba(255,138,29,.28);
+    }
+    h1 { font-size: clamp(3rem, 7vw, 6.5rem); line-height: .88; letter-spacing: -.075em; margin: 20px 0 18px; color: var(--blue-950); }
+    .hero p { font-size: clamp(1.12rem, 2vw, 1.38rem); color: var(--muted); line-height: 1.55; margin: 0 0 28px; max-width: 650px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    .micro { color: var(--muted); font-size: .94rem; margin-top: 16px; }
+
+    .mascot-card {
+      position: relative; border-radius: var(--radius-xl); background: linear-gradient(155deg, #ffffff, #fff1d8);
+      padding: 20px; box-shadow: var(--shadow); transform: rotate(1.2deg);
+      border: 1px solid rgba(7,26,45,.08);
+    }
+    .mascot-card img { display: block; width: 100%; border-radius: 26px; }
+    .ticket {
+      position: absolute; left: -18px; bottom: 34px; background: var(--blue-950); color: white;
+      border-radius: 20px; padding: 16px 18px; box-shadow: 0 16px 42px rgba(7,26,45,.25);
+      max-width: 220px;
+    }
+    .ticket strong { display: block; color: var(--orange-2); font-size: 1.35rem; }
+    .ticket span { font-size: .88rem; opacity: .86; }
+    .score {
+      position: absolute; right: -10px; top: -18px; background: var(--orange); color: #142033;
+      border-radius: 999px; padding: 14px 17px; font-weight: 1000; box-shadow: 0 16px 34px rgba(255,138,29,.32);
+    }
+
+    .section { padding: 64px 0; }
+    .section-title { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 26px; }
+    h2 { font-size: clamp(2rem, 4vw, 3.3rem); line-height: 1; letter-spacing: -.055em; margin: 0; color: var(--blue-950); }
+    .section-title p { margin: 0; color: var(--muted); max-width: 440px; line-height: 1.55; }
+
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .step, .run-card, .newsletter, .community-card {
+      background: rgba(255,255,255,.82); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: 0 14px 42px rgba(7,26,45,.08);
+    }
+    .step { padding: 22px; }
+    .step b { color: var(--orange); font-size: 2rem; display: block; margin-bottom: 12px; }
+    .step h3, .run-card h3 { margin: 0 0 8px; font-size: 1.18rem; color: var(--blue-950); }
+    .step p, .run-card p { margin: 0; color: var(--muted); line-height: 1.5; }
+
+    .runs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .run-card { padding: 22px; position: relative; overflow: hidden; }
+    .run-card::before { content: ""; position: absolute; inset: 0 0 auto; height: 6px; background: linear-gradient(90deg, var(--orange), var(--blue-800)); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+    .tag { font-size: .78rem; font-weight: 900; color: var(--blue-800); padding: 7px 10px; background: #edf6ff; border-radius: 999px; }
+    .verdict { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--line); font-weight: 900; }
+    .verdict em { font-style: normal; color: var(--orange); }
+
+    .newsletter {
+      display: grid; grid-template-columns: 1fr .9fr; gap: 28px; align-items: center;
+      padding: 34px; background: linear-gradient(135deg, var(--blue-950), var(--blue-800)); color: white;
+    }
+    .newsletter h2 { color: white; }
+    .newsletter p { color: rgba(255,255,255,.78); line-height: 1.55; font-size: 1.06rem; }
+    .form { display: flex; gap: 10px; background: white; padding: 8px; border-radius: 999px; box-shadow: 0 18px 54px rgba(0,0,0,.18); }
+    .form input { flex: 1; min-width: 0; border: 0; outline: 0; padding: 0 16px; font: inherit; color: var(--ink); }
+    .note { font-size: .85rem !important; margin: 12px 0 0 !important; }
+
+    .badges { display: flex; flex-wrap: wrap; gap: 12px; }
+    .badge { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 12px 16px; font-weight: 900; box-shadow: 0 10px 28px rgba(7,26,45,.07); }
+
+    .grade-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .grade-card { background: rgba(255,255,255,.86); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: 0 14px 42px rgba(7,26,45,.08); padding: 24px; }
+    .grade-card h3 { margin: 0 0 8px; color: var(--blue-950); font-size: 1.45rem; letter-spacing: -.025em; }
+    .grade-card p { margin: 0 0 18px; color: var(--muted); line-height: 1.5; }
+    .grade-list { display: grid; gap: 10px; }
+    .grade-row { display: grid; grid-template-columns: 74px 1fr; gap: 12px; align-items: center; padding: 11px 12px; border-radius: 16px; background: #f6fbff; border: 1px solid rgba(18,57,91,.08); }
+    .grade-row strong { color: var(--orange); font-size: .92rem; }
+    .grade-row span { font-weight: 900; color: var(--blue-900); }
+
+    .community-card { padding: 28px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+    .community-card p { color: var(--muted); line-height: 1.55; margin: 10px 0 0; max-width: 720px; }
+
+    footer { padding: 36px 0 54px; color: var(--muted); }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); padding-top: 24px; }
+
+    @media (max-width: 880px) {
+      .nav-links { display: none; }
+      .hero-grid, .newsletter, .community-card { grid-template-columns: 1fr; }
+      .steps, .runs, .grade-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 46px; }
+      .ticket, .score { position: static; margin-top: 14px; display: inline-block; }
+      .mascot-card { transform: none; }
+      .section-title { display: block; }
+      .section-title p { margin-top: 12px; }
+      .form { border-radius: 22px; flex-direction: column; }
+      .form input { min-height: 48px; }
+      footer .wrap { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Speed Run Travel">
+        <img class="brand-mark" src="assets/mascot.jpg" alt="Mascotte pigeon Speed Run Travel" />
+        <span>Speed Run Travel</span>
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="#concept">Concept</a>
+        <a href="#runs">Runs</a>
+        <a href="#newsletter">Newsletter</a>
+        <a href="#grades">Grades</a>
+        <a href="#communaute">Communauté</a>
+      </nav>
+      <a class="btn btn-primary" href="#newsletter">Recevoir le prochain</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">🚄 Escapades culturelles optimisées</span>
+          <h1>Une ville. Deux musées. Une balade.</h1>
+          <p>Speed Run Travel prépare des journées prêtes à suivre : départ tôt, itinéraire malin, pauses bien placées, score fatigue, budget, et retour maison sans galère.</p>
+          <div class="hero-actions">
+            <a class="btn btn-dark" href="#runs">Voir les premiers runs</a>
+            <a class="btn btn-ghost" href="#concept">Comprendre le format</a>
+          </div>
+          <div class="micro">Promesse : moins de logistique, plus de ville. Et si possible, pas de nuit d’hôtel.</div>
+        </div>
+        <div class="mascot-card" aria-label="Mascotte Speed Run Travel">
+          <img src="assets/mascot.jpg" alt="Logo Speed Run Travel avec pigeon voyageur" />
+          <div class="score">8,5/10<br><small>j’y vais</small></div>
+          <div class="ticket"><strong>Run validé</strong><span>2 musées · 1 balade · retour avant 22h</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="concept">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Le format speed run</h2>
+          <p>Un cadre simple, presque sportif, pour transformer une ville en mission culturelle faisable dans la journée.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><b>01</b><h3>Départ tôt</h3><p>Train ou avion matinal, temps de transfert réaliste, marge anti-galère.</p></article>
+          <article class="step"><b>02</b><h3>Deux musées</h3><p>Un incontournable, un choix plus malin ou local, avec horaires et billets.</p></article>
+          <article class="step"><b>03</b><h3>Balade utile</h3><p>Un itinéraire compact entre quartiers, monuments, cafés et points photo.</p></article>
+          <article class="step"><b>04</b><h3>Retour maison</h3><p>Verdict clair : j’y vais, j’attends ou j’évite. Nuit seulement si nécessaire.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="runs">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Premiers runs à tester</h2>
+          <p>Des fiches courtes, concrètes, notées. Chaque run doit pouvoir être suivi sans passer trois heures à organiser.</p>
+        </div>
+        <div class="runs">
+          <article class="run-card">
+            <h3>Lille depuis Paris</h3>
+            <p>Le classique parfait : rapide, culturel, gourmand, retour facile.</p>
+            <div class="tags"><span class="tag">🚄 1h</span><span class="tag">🖼️ Beaux-Arts</span><span class="tag">🚶 Vieux-Lille</span></div>
+            <div class="verdict"><span>Score</span><em>9/10</em></div>
+          </article>
+          <article class="run-card">
+            <h3>Bruxelles express</h3>
+            <p>Ville étrangère dans la journée, musées solides et vraie ambiance.</p>
+            <div class="tags"><span class="tag">🌍 Belgique</span><span class="tag">🍫 pause</span><span class="tag">🕘 dense</span></div>
+            <div class="verdict"><span>Score</span><em>8/10</em></div>
+          </article>
+          <article class="run-card">
+            <h3>Rouen sans dormir</h3>
+            <p>Cathédrale, beaux-arts, centre historique : très bon ratio effort/plaisir.</p>
+            <div class="tags"><span class="tag">🚄 facile</span><span class="tag">⛪ patrimoine</span><span class="tag">🌧️ plan B</span></div>
+            <div class="verdict"><span>Score</span><em>8,5/10</em></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="newsletter">
+      <div class="wrap newsletter">
+        <div>
+          <span class="eyebrow">📬 Newsletter</span>
+          <h2>Sois au courant du prochain Speed Run Travel.</h2>
+          <p>Chaque envoi : une ville faisable, l’itinéraire heure par heure, le budget, les pièges à éviter, le score fatigue et le verdict final.</p>
+        </div>
+        <div>
+          <form class="form" action="#" method="post">
+            <input type="email" name="email" placeholder="ton@email.fr" aria-label="Adresse email" required />
+            <button class="btn btn-primary" type="submit">Je veux le prochain</button>
+          </form>
+          <p class="note">Prototype : le formulaire sera branché plus tard sur Brevo, Buttondown, Substack ou autre outil newsletter.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Badges à collectionner</h2>
+          <p>Le côté communautaire vient du jeu : comparer les runs, valider des contraintes, partager ses propres itinéraires.</p>
+        </div>
+        <div class="badges">
+          <span class="badge">🖼️ 2 musées validés</span>
+          <span class="badge">🚄 100 % train</span>
+          <span class="badge">🕘 retour avant 22h</span>
+          <span class="badge">🚶 20 000 pas</span>
+          <span class="badge">🌧️ plan B pluie</span>
+          <span class="badge">🛏️ nuit évitée</span>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section" id="grades">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Passe tes grades</h2>
+          <p>Chaque ville validée fait monter ton rang. Deux corps principaux : le rail pour les runs en train, l’air pour les runs en avion.</p>
+        </div>
+        <div class="grade-grid">
+          <article class="grade-card">
+            <h3>🚄 Armée de Terre — train</h3>
+            <p>Pour les speed runners qui conquièrent les villes par les quais, les correspondances et les retours tardifs.</p>
+            <div class="grade-list">
+              <div class="grade-row"><strong>1 ville</strong><span>Recrue du rail</span></div>
+              <div class="grade-row"><strong>5 villes</strong><span>Caporal des quais</span></div>
+              <div class="grade-row"><strong>10 villes</strong><span>Sergent grande ligne</span></div>
+              <div class="grade-row"><strong>25 villes</strong><span>Lieutenant intercités</span></div>
+              <div class="grade-row"><strong>50 villes</strong><span>Commandant TGV</span></div>
+              <div class="grade-row"><strong>100 villes</strong><span>Colonel des rails</span></div>
+              <div class="grade-row"><strong>250 villes</strong><span>Général du réseau</span></div>
+              <div class="grade-row"><strong>500 villes</strong><span>Maréchal des gares</span></div>
+            </div>
+          </article>
+          <article class="grade-card">
+            <h3>✈️ Armée de l’Air — avion</h3>
+            <p>Pour les missions express avec terminaux, embarquements matinaux, salons et retours le soir.</p>
+            <div class="grade-list">
+              <div class="grade-row"><strong>1 ville</strong><span>Cadet embarquement</span></div>
+              <div class="grade-row"><strong>5 villes</strong><span>Caporal cockpit</span></div>
+              <div class="grade-row"><strong>10 villes</strong><span>Sergent escale</span></div>
+              <div class="grade-row"><strong>25 villes</strong><span>Lieutenant terminal</span></div>
+              <div class="grade-row"><strong>50 villes</strong><span>Commandant navette</span></div>
+              <div class="grade-row"><strong>100 villes</strong><span>Colonel du tarmac</span></div>
+              <div class="grade-row"><strong>250 villes</strong><span>Général du ciel</span></div>
+              <div class="grade-row"><strong>500 villes</strong><span>Maréchal des horizons</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="communaute">
+      <div class="wrap community-card">
+        <div>
+          <h2>Propose ton run</h2>
+          <p>Une ville, deux musées, une balade, un retour. La communauté pourra proposer ses itinéraires, ses scores fatigue, ses bons plans café et ses pièges à éviter.</p>
+        </div>
+        <a class="btn btn-dark" href="mailto:hello@speedrun.travel?subject=Je propose un Speed Run">Envoyer une idée</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <strong>Speed Run Travel</strong>
+      <span>Une ville. Deux musées. Une balade. Retour maison.</span>
+    </div>
+  </footer>
+</body>
+</html>
